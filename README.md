@@ -1,4 +1,4 @@
-# ssr-with-vue-js-nuxt-js
+# Server-Side Rendering with Vue.js and Nuxt.js
 
 ## Build Setup
 
