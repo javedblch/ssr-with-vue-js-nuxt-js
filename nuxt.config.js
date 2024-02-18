@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'ssr-with-vue-js-nuxt-js',
+    title: 'Server-Side Rendering with Vue.js and Nuxt.js',
     htmlAttrs: {
       lang: 'en'
     },
@@ -15,27 +15,34 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
-
-  // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
+  
+  serverMiddleware: [
+    // Register the /api/products route
+    { path: '/api/products', handler: '~/api/products.js' }
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    { src: '~/plugins/axios.js' } // Include Axios plugin
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [
+  // Nuxt.js modules
+  modules: [
+    // Axios module
+    '@nuxtjs/axios',
   ],
 
-  // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-  ],
+  // Axios module configuration
+  axios: {
+    // API endpoint
+    baseURL: 'http://localhost:3000' // Assuming API server is running locally
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
+ build: {
+    transpile: [({ isLegacy }) => isLegacy && 'axios']
   }
 }
